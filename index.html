@@ -22,6 +22,8 @@
         <label for="text-1">Text input:</label>
         <input name="text-1" id="text1" value="1" type="text">
         <input type="submit" value="Submit Button" id="button1" />
+		<label for="text-2">Add a new quote:</label>
+		 <input type="submit" value="Submit Button" id="button2" />
 
     <!-- put the result here -->
     <div id="result"  class="functions"></div>
@@ -52,6 +54,15 @@ $(document).bind('pageinit', function() {
       $("#result").html("<p><b>"+data.author+" said "+data.text+"</b></p>")
     }, 'json');
   });
+  
+  $( "#button2" ).bind( "click", function(event, ui) {
+      alert("Posting a new quote");
+      var jsonUrl = "http://localhost:3001/quote";
+      var newQuote = { "author" : "foo", "text" : "some text" };
+      $.post(jsonUrl,newQuote, function(data) {
+        alert("Added " + data.author + " " + data.text);
+      }, 'json');
+    });
 
 });
 </script>
